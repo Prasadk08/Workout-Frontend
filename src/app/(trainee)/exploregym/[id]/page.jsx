@@ -69,7 +69,7 @@ const JoinGymPage = () => {
         }`}
       >
         <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
-          Join {gym.gymName}
+          Joi {gym.gymName}
 
         </h1>
 
