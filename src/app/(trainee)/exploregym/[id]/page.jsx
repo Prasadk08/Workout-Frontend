@@ -134,7 +134,6 @@ const JoinGymPage = () => {
                       />
 
                       <span>{plan.planName}</span>
-                      <span>{plan.planName}</span>
                       <span>{plan.price}</span>
                     </label>
                   ))}
