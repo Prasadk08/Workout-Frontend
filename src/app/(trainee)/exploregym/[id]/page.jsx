@@ -41,7 +41,7 @@ const JoinGymPage = () => {
     }
     try {
       let join = await axios.post(
-        "http://localhost:8080/trainee/join",
+        "http://localhost:8080/trainee/confirmjoin",
         {
           gymId: id,
           planId: selectedPlan,
@@ -52,6 +52,7 @@ const JoinGymPage = () => {
           },
         }
       );
+      setBlur(false);
       toast.success("Joined Successfully");
       setShowModal(false);
     } catch (e) {
@@ -70,7 +71,6 @@ const JoinGymPage = () => {
       >
         <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
           Join {gym.gymName}
-
         </h1>
 
         <div className="bg-white rounded-xl shadow-md p-6 space-y-4 text-gray-800">
@@ -92,7 +92,9 @@ const JoinGymPage = () => {
             <strong className="text-blue-600">Available Plans:</strong>
             <ul className="list-disc list-inside ml-2 mt-1">
               {gym.plans &&
-                gym.plans.map((plan) => <li key={plan._id}>{plan.title}</li>)}
+                gym.plans.map((plan) => (
+                  <li key={plan._id}>{plan.planName}</li>
+                ))}
             </ul>
           </div>
         </div>
@@ -120,7 +122,7 @@ const JoinGymPage = () => {
                   gym.plans.map((plan) => (
                     <label
                       key={plan._id}
-                      className="flex items-center p-2 border rounded-lg cursor-pointer hover:bg-gray-100 transition"
+                      className="flex items-center justify-around p-2 border rounded-lg cursor-pointer hover:bg-gray-100 transition"
                     >
                       <input
                         type="radio"
@@ -128,9 +130,11 @@ const JoinGymPage = () => {
                         value={plan._id}
                         checked={selectedPlan === plan._id}
                         onChange={() => setSelectedPlan(plan._id)}
-                        className="mr-2"
+                        className="ml-4"
                       />
-                      <span>{plan.title}</span>
+
+                      <span>{plan.planName}</span>
+                      <span>{plan.price}</span>
                     </label>
                   ))}
               </div>
