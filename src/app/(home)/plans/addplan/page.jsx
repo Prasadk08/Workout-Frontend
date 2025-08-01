@@ -35,15 +35,22 @@ export default function AddPlanPage() {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
     try {
       let token = localStorage.getItem("token");
-      let res = await axios.post("http://localhost:8080/trainee/addplans", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      let res = await axios.post(
+        "http://localhost:8080/trainee/addplans",
+        {
+          ...formData,
+          price: Number(formData.price),
+          duration: Number(formData.duration),
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
     } catch (e) {
       console.log(e);
     }
@@ -78,7 +85,7 @@ export default function AddPlanPage() {
             Duration
           </label>
           <input
-            type="text"
+            type="number"
             name="duration"
             value={formData.duration}
             onChange={handleChange}

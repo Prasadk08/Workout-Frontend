@@ -11,6 +11,7 @@ const JoinGymPage = () => {
   const [gym, setGym] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -39,12 +40,17 @@ const JoinGymPage = () => {
       toast.error("Please select a plan");
       return;
     }
+    let startDate = new Date()
+    let endDate = new Date(startDate)
+    endDate.setMonth(startDate.getMonth()+duration)
     try {
       let join = await axios.post(
         "http://localhost:8080/trainee/confirmjoin",
         {
           gymId: id,
           planId: selectedPlan,
+          startDate,
+          endDate
         },
         {
           headers: {
@@ -129,7 +135,7 @@ const JoinGymPage = () => {
                         name="plan"
                         value={plan._id}
                         checked={selectedPlan === plan._id}
-                        onChange={() => setSelectedPlan(plan._id)}
+                        onChange={() =>{ setSelectedPlan(plan._id); setDuration(plan.duration)}}
                         className="ml-4"
                       />
 

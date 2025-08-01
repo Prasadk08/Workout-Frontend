@@ -17,7 +17,6 @@ export default function traineesign() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-
       let res = await axios.post("http://localhost:8080/traineesignup", form);
       console.log(res.data)
       if(res.data.msg) console.log(res.data.msg)
