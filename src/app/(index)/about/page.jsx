@@ -10,7 +10,6 @@ const About = () => {
       </div>
       <div className="text-3xl font-bold text-center text-red-500 p-4">
         All at One Place
-        All at One Place
       </div>
       <div className="text-black text-xl text-center p-4 max-w-4xl m-auto">
         Workout empowers gym owners to take full control of their gym operations
