@@ -1,45 +1,44 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { User, Dumbbell, Phone, MapPin, PenIcon } from "lucide-react";
+import { User, Dumbbell, Phone, MapPin, PenIcon, Home } from "lucide-react";
 import Link from "next/link";
 
-const ProfileView = () => {
-  const [owner, setOwner] = useState({
-    name: "",
-    gymName: "",
-    phone: "",
-    gymLocation: "",
-  });
+const MyDetailsPage = () => {
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    let token = localStorage.getItem("token");
+    const callData = async () => {
       try {
-        const token = localStorage.getItem("token");
-        let res = await axios.get(
-          "http://localhost:8080/owner/profile",
+        const response = await axios.get(
+          "http://localhost:8080/trainee/profile/mydetail",
           {
-            headers: { Authorization: `Bearer ${token}` },
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
           }
         );
-        setOwner(res.data);
-      } catch (err) {
-        console.error("Error fetching profile", err);
+        setUser(response.data);
+      } catch (e) {
+        console.log("Error fetching details: ", e);
       }
     };
-    fetchData();
+    callData();
   }, []);
+
+  console.log("User Dataaa ", user);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-100 to-amber-100 flex items-center justify-center px-4">
       <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-xl">
         <div className="flex justify-around">
           <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            Owner Profile
+            Profile
           </h2>
           <div className="flex">
             <PenIcon className="text-red" />
-            <Link className="px-2" href={"/home/profile/edit"}>
+            <Link className="px-2" href={"/trainee/detail/edit"}>
               Edit Info
             </Link>
           </div>
@@ -50,20 +49,20 @@ const ProfileView = () => {
           <div className="flex items-center space-x-4">
             <User className="text-blue-500" />
             <div>
-              <p className="text-sm text-gray-500">Owner Name</p>
+              <p className="text-sm text-gray-500">Name</p>
               <p className="text-xl font-semibold text-gray-800">
-                {owner.name || "Not Available"}
+                {user.name || "Not Available"}
               </p>
             </div>
           </div>
 
-          {/* Gym Name */}
+          {/* Gym Status */}
           <div className="flex items-center space-x-4">
             <Dumbbell className="text-pink-500" />
             <div>
-              <p className="text-sm text-gray-500">Gym Name</p>
+              <p className="text-sm text-gray-500">Gym Status</p>
               <p className="text-xl font-semibold text-gray-800">
-                {owner.gymName || "Not Available"}
+                {user.isActive ? "Active" : "Inactive"}
               </p>
             </div>
           </div>
@@ -74,18 +73,29 @@ const ProfileView = () => {
             <div>
               <p className="text-sm text-gray-500">Phone Number</p>
               <p className="text-xl font-semibold text-gray-800">
-                {owner.phone || "Not Available"}
+                {user?.phone || "Not Available"}
               </p>
             </div>
           </div>
 
-          {/* Location */}
+          {/* Current Plan */}
           <div className="flex items-center space-x-4">
             <MapPin className="text-amber-500" />
             <div>
-              <p className="text-sm text-gray-500">Gym Location</p>
+              <p className="text-sm text-gray-500">Current Plan</p>
               <p className="text-xl font-semibold text-gray-800">
-                {owner.gymLocation || "Not Available"}
+                {user?.myPlan?.planName || "Not Available"}
+              </p>
+            </div>
+          </div>
+
+          {/* Address */}
+          <div className="flex items-center space-x-4">
+            <Home className="text-purple-500" />
+            <div>
+              <p className="text-sm text-gray-500">Address</p>
+              <p className="text-xl font-semibold text-gray-800">
+                {user?.address || "Not Available"}
               </p>
             </div>
           </div>
@@ -95,4 +105,4 @@ const ProfileView = () => {
   );
 };
 
-export default ProfileView;
+export default MyDetailsPage;

@@ -39,7 +39,7 @@ export default function AddPlanPage() {
     try {
       let token = localStorage.getItem("token");
       let res = await axios.post(
-        "http://localhost:8080/trainee/addplans",
+        "http://localhost:8080/owner/addplans",
         {
           ...formData,
           price: Number(formData.price),

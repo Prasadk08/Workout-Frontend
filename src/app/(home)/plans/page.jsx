@@ -1,12 +1,19 @@
 "use client";
 import SidebarLayout from "@/components/SidebarLayout";
+import { getownerData } from "@/features/ownerData";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function PlansPage() {
   const [plans, setPlans] = useState([]);
+  const dispatch = useDispatch()
 
-  
+  const data = useSelector((state)=> state.ownerData.ownerdata)
+  let token = localStorage.getItem("token")
+  useEffect(()=>{
+    dispatch(getownerData(token))
+  },[dispatch])
 
   return (
     <div className="mb-6">
@@ -21,12 +28,12 @@ export default function PlansPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {plans.map((plan, index) => (
+        {data.map((plan, index) => (
           <div key={index} className="bg-white shadow rounded-xl p-6">
             <h2 className="text-xl font-semibold text-gray-800 mb-2">
-              {plan.name}
+              {plan.planName}
             </h2>
-            <p className="text-gray-600 mb-2">{plan.duration}</p>
+            <p className="text-gray-600 mb-2">Months : {plan.duration}</p>
             <p className="text-lg font-bold text-blue-600 mb-4">
               ₹{plan.price}
             </p>

@@ -34,7 +34,7 @@ const EditProfileForm = () => {
     console.log(localStorage.getItem("token"));
     try {
       let res = await axios.post(
-        "http://localhost:8080/home/profile/edit",
+        "http://localhost:8080/owner/profile/edit",
         formData,
         {
           headers: {
