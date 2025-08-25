@@ -10,8 +10,8 @@ export default function PlansPage() {
   const dispatch = useDispatch()
 
   const data = useSelector((state)=> state.ownerData.ownerdata)
-  let token = localStorage.getItem("token")
   useEffect(()=>{
+    let token = localStorage.getItem("token")
     dispatch(getownerData(token))
   },[dispatch])
 
