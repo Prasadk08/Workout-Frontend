@@ -21,9 +21,12 @@ export default function traineesign() {
       console.log(res.data)
       if(res.data.msg) console.log(res.data.msg)
       if(res.data.token) console.log(res.data.token)
-      if(res.data.err) console.log(res.data.err)
     }catch(e){
-      console.log(e)
+      if(e.response && e.response.status === 409){
+        toast.error("Username already exists");
+      }else{
+        console.log(e)
+      }
     }
     
   };

@@ -1,19 +1,63 @@
-import Link from 'next/link'
-import React from 'react'
+"use client";
+import Link from "next/link";
+import React, { useState } from "react";
+import { UserCircleIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const HomeSidebar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const links = [
+    { name: "Home", href: "/home" },
+    { name: "Members", href: "/members" },
+    { name: "Plans", href: "/plans" },
+    { name: "Check Status", href: "/status" },
+  ];
+
   return (
-    <div className='h-screen w-xs  bg-gray-800 text-white'>
-      <div className='sideprofile text-2xl py-4 px-4 h-20'><Link href={"/home/profile"}>This is Profile</Link></div>
-      <div className='sidebarhomelinks w-full flex flex-col justify-center items-center mt-4'>
-        <Link href="/home" className='w-[90%] h-12 hover:bg-gray-700 py-3 text-center transition rounded-xl'>Home</Link>
-        <Link href="/members" className='w-[90%] h-12 hover:bg-gray-700 py-3 text-center transition rounded-xl'>Members</Link>
-        <Link href="/plans" className='w-[90%] h-12 hover:bg-gray-700 py-3 text-center transition rounded-xl'>Plans</Link>
-        <Link href="/status" className='w-[90%] h-12 hover:bg-gray-700 py-3 text-center transition rounded-xl'>Check Status</Link>
-        <Link href="/logout" className='w-[90%] h-12 hover:bg-gray-700 py-3 text-center transition rounded-xl'>Logout</Link>
+    <div className="flex">
+      {/* Mobile Toggle Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-900 text-white"
+      >
+        {isOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
+      </button>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-screen w-64 bg-gray-900 text-white flex flex-col shadow-lg transform transition-transform duration-300 z-40
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} md:translate-x-0`}
+      >
+        {/* Sidebar Header with Profile Icon */}
+        <Link
+          href={"/home/profile"}
+          className="flex items-center gap-3 py-6 px-6 border-b border-gray-700"
+        >
+          <UserCircleIcon className="w-10 h-10 text-green-500" />
+          <span className="text-2xl font-bold">Dashboard</span>
+        </Link>
+
+        {/* Navigation Links */}
+        <nav className="flex-1 mt-6 px-4 space-y-2">
+          {links.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block w-full py-3 px-4 rounded-lg text-center font-medium hover:bg-green-600 hover:text-white transition-all"
+              onClick={() => setIsOpen(false)} // auto-close on mobile
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Footer */}
+        <div className="px-4 py-6 border-t border-gray-700 text-center text-sm text-gray-400">
+          © 2025 Fitness App
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default HomeSidebar
+export default HomeSidebar;

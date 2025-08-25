@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 export default function ownwersign() {
@@ -16,8 +17,16 @@ export default function ownwersign() {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    let res = axios.post("http://localhost:8080/ownersignup",form)
-    // API call logic here
+    try{
+      let res = await axios.post("http://localhost:8080/ownersignup",form)
+    }catch(err){
+      if(err.response && err.response.status === 409){
+        toast.error("Username already exists");
+      }else{
+        console.log(err)
+      }
+    }
+
   };
 
   return (

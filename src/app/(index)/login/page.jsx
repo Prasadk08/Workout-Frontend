@@ -28,8 +28,10 @@ const Login = () => {
         router.push("/trainee");
       }
     } catch (e) {
-      if (e.response && e.response.data && e.response.data.error) {
-        toast.error(e.response.data.error);
+      if (e.response && e.response.status == 404) {
+        toast.error("Username not found.");
+      }else if(e.response && e.response.status == 401){
+        toast.error("Wrong password.");
       } else {
         toast.error("Something went wrong. Try again!");
       }

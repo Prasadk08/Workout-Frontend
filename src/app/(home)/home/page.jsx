@@ -36,19 +36,9 @@ export default function Dashboard() {
         console.error("Error fetching owner data", err);
       }
     };
-    const fetchImages = async () => {
-      try {
-        const res = await axios.get("http://localhost:8080/owner/images", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setImages(res.data);
-      } catch (e) {
-        console.error("fetch images", e);
-      }
-    };
+ 
     if (token) {
       fetchData();
-      fetchImages();
     }
   }, [token]);
 
@@ -62,7 +52,7 @@ const onPickFiles = (e) => {
   setUploading(true);
   try {
     const form = new FormData();
-    form.append("image", files[0]);   // ✅ ekach file append
+    form.append("image", files[0]);   // only one file append
 
     const res = await axios.post("http://localhost:8080/gymowner/upload", form, {
       headers: {
@@ -71,7 +61,7 @@ const onPickFiles = (e) => {
       },
     });
 
-    setImages((prev) => [...prev, res.data]);  // ekach image add
+    setImages((prev) => [...prev, res.data]);  // only one image add
     toast.success("Uploaded successfully");
     setFiles([]);
   } catch (e) {
@@ -81,7 +71,7 @@ const onPickFiles = (e) => {
     setUploading(false);
   }
 };
-console.log("Owner data fetched successfully ", images);
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">

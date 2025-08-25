@@ -1,5 +1,5 @@
 "use client";
-import SidebarLayout from "@/components/SidebarLayout";
+
 import { getownerData } from "@/features/ownerData";
 import Link from "next/link";
 import { useEffect, useState } from "react";
