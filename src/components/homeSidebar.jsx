@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { UserCircleIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, ClipboardListIcon, HomeIcon, UserCircle, UsersIcon } from "lucide-react";
 
 const HomeSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,12 +17,14 @@ const HomeSidebar = () => {
   return (
     <div className="flex">
       {/* Mobile Toggle Button */}
-      <button
+
+      {/* <button
         onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-gray-900 text-white"
+        className="md:hidden fixed top-4 left-10 z-50 p-2 rounded-md bg-gray-900 text-white"
       >
         {isOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
       </button>
+      */}
 
       {/* Sidebar */}
       <div
@@ -55,6 +58,31 @@ const HomeSidebar = () => {
         <div className="px-4 py-6 border-t border-gray-700 text-center text-sm text-gray-400">
           © 2025 Fitness App
         </div>
+      </div>
+
+      <div className="fixed bottom-0 left-0 w-screen bg-white shadow-md z-50 md:hidden flex justify-around items-center h-14">
+        <Link href="/home" className="flex flex-col items-center text-gray-600">
+          <HomeIcon className="w-6 h-6" />
+          <span className="text-base">Home</span>
+        </Link>
+        <Link href="/members" className="flex flex-col items-center text-gray-600">
+          <UsersIcon className="w-6 h-6" />
+          <span className="text-base">Members</span>
+        </Link>
+        <Link href="/plans" className="flex flex-col items-center text-gray-600">
+          <ClipboardListIcon className="w-6 h-6" />
+          <span className="text-base">Plans</span>
+        </Link>
+        <Link href="/status" className="flex flex-col items-center text-gray-600">
+          <CheckCircleIcon className="w-6 h-6" />
+          <span className="text-base">Status</span>
+        </Link>
+        <Link href="/home/profile" className="flex flex-col items-center text-gray-600">
+          <UserCircle className="w-6 h-6" />
+          <span className="text-base">Profile</span>
+        </Link>
+        
+
       </div>
     </div>
   );

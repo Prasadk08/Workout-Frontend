@@ -1,9 +1,14 @@
 "use client";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 import React, { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 const EditProfileForm = () => {
+
+  const router = useRouter()
+
   const [formData, setFormData] = useState({
     name: "",
     gymName: "",
@@ -11,7 +16,8 @@ const EditProfileForm = () => {
     gymLocation: "",
   });
 
-  // Simulate fetching existing data (replace with actual API call)
+
+  // Simulate fetching existing data
   useEffect(() => {
     const fetchData = async () => {
       const dummyData = {
@@ -42,6 +48,8 @@ const EditProfileForm = () => {
           },
         }
       );
+      toast.success("User updated Successfully")
+      router.push("/home")
     } catch (e) {
         console.log("Errorr ",e)
     }
@@ -50,7 +58,7 @@ const EditProfileForm = () => {
   return (
     <div className="min-h-screen bg-gradient-to-r from-amber-100 to-cyan-100 flex items-center justify-center px-4">
       <div className="w-full max-w-xl bg-white shadow-lg rounded-2xl p-8">
-        <h2 className="text-3xl font-bold mb-6 text-center text-amber-600">
+        <h2 className="text-xl md:text-3xl font-bold mb-6 text-center text-amber-600">
           Edit Profile
         </h2>
         <form onSubmit={handleSubmit} className="space-y-5">

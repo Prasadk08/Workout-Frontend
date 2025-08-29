@@ -16,7 +16,7 @@ const ownerDataSlice = createSlice({
     name:"ownerdata",
     initialState:{
         ownerdata:[],
-        loading:false,
+        loading:true,
         error:null
     },
     reducers:{},
@@ -29,6 +29,7 @@ const ownerDataSlice = createSlice({
             state.ownerdata=action.payload
         })
         .addCase(getownerData.rejected,(state)=>{
+            state.loading=false
             state.error="Something wrong while fetching owner data"
         })
     }

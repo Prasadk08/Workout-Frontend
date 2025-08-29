@@ -1,32 +1,38 @@
 "use client";
+import Loading from "@/app/Loading/page";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 const RecentJoinsPage = () => {
-    const[traineeData,setTrainee]=useState({})
+  const [traineeData, setTrainee] = useState({});
+  const [loading, setLoading] = useState(true);
 
-    useEffect(()=>{
-        let token = localStorage.getItem("token");
-        const callData = async () => {
-            try{
-                const response = await axios.get("http://localhost:8080/trainee/profile/recent",{
-                headers:{
-                    authorization:`Bearer ${token}`
-                }
-            })
-            setTrainee(response.data);
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    const callData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8080/trainee/profile/recent",
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setTrainee(response.data);
+        setLoading(false);
+      } catch (e) {
+        console.log("Error fetching recent joins: ", e);
+      }
+    };
+    callData();
+  }, []);
 
-            }catch(e){
-                console.log("Error fetching recent joins: ", e);
-            }
-        };
-        callData();
-    },[])
+  if (loading) return <Loading />;
 
   return (
     <div className="min-h-screen w-full bg-gray-50 p-6">
-    
-       <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-800 mb-8">
           Recent Joinings 🏋️
         </h1>
@@ -47,14 +53,17 @@ const RecentJoinsPage = () => {
                 {new Date(traineeData.startDate).toLocaleDateString()}
               </p>
               <p className="text-gray-600">
-                <span className="font-semibold">Plan:</span> {traineeData.myPlan.planName}
+                <span className="font-semibold">Plan:</span>{" "}
+                {traineeData.myPlan.planName}
               </p>
               <p className="mt-2 inline-block bg-green-100 text-green-700 text-sm font-semibold px-3 py-1 rounded-full">
                 {traineeData.isActive ? "Active" : "Inactive"}
               </p>
             </div>
           ) : (
-            <p className="text-gray-500 italic">You haven’t joined any gym yet.</p>
+            <p className="text-gray-500 italic">
+              You haven’t joined any gym yet.
+            </p>
           )}
         </div>
 
@@ -75,8 +84,7 @@ const RecentJoinsPage = () => {
                   </h3>
                   <p className="text-gray-600">{gym.duration}</p>
                   <p className="text-gray-600">
-                    <span className="font-semibold">Price: </span>{" "}
-                    {gym.price}
+                    <span className="font-semibold">Price: </span> {gym.price}
                   </p>
                   {/* <p className="text-gray-600">
                     <span className="font-semibold">Left:</span> {gym.leftDate}

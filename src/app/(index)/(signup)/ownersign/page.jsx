@@ -3,9 +3,9 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
-
-export default function ownwersign() {
+export default function OwnerSignUp() {
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -15,29 +15,44 @@ export default function ownwersign() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-      let res = await axios.post("http://localhost:8080/ownersignup",form)
-    }catch(err){
-      if(err.response && err.response.status === 409){
-        toast.error("Username already exists");
-      }else{
-        console.log(err)
-      }
-    }
+    setLoading(true);
+    try {
+      let res = await axios.post("http://localhost:8080/ownersignup", form);
 
+      if (res.status === 201 || res.status === 200) {
+        toast.success("Account created successfully 🎉");
+        setForm({ username: "", password: "" });
+      }
+    } catch (err) {
+      if (err.response && err.response.status === 409) {
+        toast.error("Username already exists ❌");
+      } else {
+        toast.error("Something went wrong. Please try again.");
+        console.error(err);
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-indigo-500 to-purple-600 p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-          Create Account
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-500 p-6">
+      <div className="w-full max-w-md bg-white/90 backdrop-blur-md rounded-2xl shadow-xl p-8">
+        {/* Title */}
+        <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-2">
+          Create Your Account
         </h2>
+        <p className="text-center text-gray-500 mb-6 text-sm">
+          Sign up to manage your restaurant with ease 🚀
+        </p>
+
+        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
+          {/* Username */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Username
             </label>
             <input
@@ -46,12 +61,14 @@ export default function ownwersign() {
               value={form.username}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              placeholder="Username"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
+              placeholder="Enter username"
             />
           </div>
+
+          {/* Password */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
               Password
             </label>
             <input
@@ -60,22 +77,34 @@ export default function ownwersign() {
               value={form.password}
               onChange={handleChange}
               required
-              className="mt-1 w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition"
               placeholder="••••••••"
             />
           </div>
+
+          {/* Submit Button */}
           <button
             type="submit"
-            className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition duration-300"
+            disabled={loading}
+            className={`w-full py-3 rounded-xl font-semibold text-white shadow-md transform transition duration-300 ${
+              loading
+                ? "bg-indigo-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 hover:scale-[1.02]"
+            }`}
           >
-            Sign Up
+            {loading ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
-        <p className="text-center text-sm text-gray-500 mt-4">
+
+        {/* Bottom Text */}
+        <p className="text-center text-sm text-gray-600 mt-6">
           Already have an account?
-          <a href="/login" className="text-indigo-600 hover:underline ml-1">
+          <Link
+            href="/login"
+            className="text-indigo-600 font-medium hover:underline ml-1"
+          >
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>

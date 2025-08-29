@@ -15,7 +15,7 @@ const memberSlice = createSlice({
     name :"members",
     initialState:{
         allmembers:[],
-        loading:false,
+        loading:true,
         error:null
     },
     reducers:{

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "next/navigation";
 import toast from "react-hot-toast";
+import Loading from "@/app/Loading/page";
 
 const JoinGymPage = () => {
   const { id } = useParams();
@@ -13,17 +14,22 @@ const JoinGymPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState("");
   const [duration, setDuration] = useState(0);
+  const[loading,setLoading]= useState(true)
 
   useEffect(() => {
     const token = localStorage.getItem("token");
     setToken(token);
 
+    console.log("Calling function")
     async function fetchGymData() {
+      console.log("Befor api call")
       try {
         const response = await axios.get(
           `http://localhost:8080/trainee/getgyminfo/${id}`
         );
+        console.log("Inside function ")
         setGym(response.data);
+        setLoading(false)
         toast.success("Gym Loaded Successfully!");
       } catch (error) {
         toast.error("Failed to load gym details.");
@@ -31,7 +37,7 @@ const JoinGymPage = () => {
     }
 
     fetchGymData();
-  }, [id]);
+  }, []);
 
   const handleConfirmJoin = () => {
     setBlur(true);
@@ -62,8 +68,8 @@ const JoinGymPage = () => {
     }
   };
 
-  if (!gym)
-    return <p className="text-center py-10 text-gray-700">Loading Gym Details...</p>;
+  if (loading) return <Loading />
+
 
   return (
     <div className="relative">
@@ -71,7 +77,7 @@ const JoinGymPage = () => {
       <div
         className={`max-w-5xl mx-auto px-6 py-12 ${blur ? "blur-sm" : "blur-none"} transition-all`}
       >
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-10">
+        <h1 className="text-2xl md:text-4xl font-bold text-center text-gray-800 mb-10">
           Join <span className="text-green-600">{gym.gymName}</span>
         </h1>
 
@@ -110,7 +116,7 @@ const JoinGymPage = () => {
           <div className="mt-6 md:mt-0 md:w-1/3 flex justify-center items-start">
             <button
               onClick={handleConfirmJoin}
-              className="bg-green-600 hover:bg-green-700 text-white py-4 px-8 rounded-xl text-lg font-semibold shadow-lg transition-all"
+              className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 md:py-4 md:px-8 rounded-xl text-lg font-semibold shadow-lg transition-all"
             >
               Join Gym
             </button>

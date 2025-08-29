@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import axios from "axios";
+import Loading from "@/app/Loading/page";
 
 const Page = () => {
   const [activePlan, setActivePlan] = useState(null);
+  const[loading,setLoading]= useState(true)
 
   useEffect(() => {
     const fetchActivePlan = async () => {
@@ -16,13 +18,15 @@ const Page = () => {
           },
         });
         setActivePlan(response.data);
-        console.log("Active Plan Data:", response.data);
+        setLoading(false)
       } catch (error) {
         console.error("Error fetching active plan:", error);
       }
     };
     fetchActivePlan()
   }, []);
+
+  if(loading) return <Loading />
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 h-screen w-full max-w-6xl mx-auto gap-8 p-6">

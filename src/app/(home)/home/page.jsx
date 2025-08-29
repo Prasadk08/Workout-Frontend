@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/app/Loading/page";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
@@ -11,6 +12,8 @@ export default function Dashboard() {
     expiredPlans: 0,
     revenue: 0,
   });
+
+  const[loading,setLoading]= useState(true)
 
   // gallery state
   const [images, setImages] = useState([]);
@@ -32,6 +35,7 @@ export default function Dashboard() {
           expiredPlans: res.data.members.filter((m) => !m.isActive).length,
           revenue: res.data.members.reduce((sum, m) => sum + (m.myPlan?.price || 0), 0),
         });
+        setLoading(false)
       } catch (err) {
         console.error("Error fetching owner data", err);
       }
@@ -72,9 +76,11 @@ const onPickFiles = (e) => {
   }
 };
 
+if(loading) return <Loading />
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6">
+      <h1 className="text-xl md:text-3xl font-bold text-gray-800 mb-6">
         Welcome, {owner?.name || "Loading..."} 👋
       </h1>
 

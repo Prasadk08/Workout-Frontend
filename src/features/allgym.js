@@ -10,21 +10,36 @@ const allgym = createSlice({
     name:"allgym",
     initialState:{
         allgym:[],
-        status:""
+        loading:true,
+        searchData:[]
+    },
+    reducers:{
+        searchReducer:(state,action)=>{
+            state.loading=true
+            state.searchData=state.allgym.filter((data)=>{
+                if(data.gymLocation.toLowerCase().includes(action.payload.toLowerCase())) return data
+            })
+            console.log(state.searchData)
+            state.loading=false
+        }
     },
     extraReducers:(builder)=>{
         builder.addCase(fetchGym.pending,(state)=>{
-            state.status="loading"
+            state.loading=true
 
         })
         .addCase(fetchGym.fulfilled,(state,action)=>{
+            state.loading=false
             state.allgym=action.payload
         })
         .addCase(fetchGym.rejected,(state)=>{
+            state.loading=false
             state.status="rejected"
         })
     }
 })
+
+export const {searchReducer} = allgym.actions
 
 export default allgym.reducer
 

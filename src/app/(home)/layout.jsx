@@ -10,7 +10,7 @@ export default function HomeLayout({ children }) {
     <html lang="en">
       <body className="flex min-h-screen bg-gray-100">
         <HomeSidebar />
-        <main className="flex-1 p-4 md:ms-64">
+        <main className="flex-1 md:ms-64">
           <Toaster position="top-center" reverseOrder={false} />
           <ProviderWrapper>{children}</ProviderWrapper>
         </main>
