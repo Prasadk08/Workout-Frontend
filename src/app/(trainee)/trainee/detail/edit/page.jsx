@@ -27,7 +27,7 @@ const EditProfilePage = () => {
     let token = localStorage.getItem("token");
     try {
       const response = await axios.put(
-        "http://localhost:8080/trainee/profile/mydetail",
+        "https://workout-backend-ethn.onrender.com/trainee/profile/mydetail",
         formData,
         {
           headers: {

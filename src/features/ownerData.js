@@ -2,7 +2,7 @@ const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 const { default: axios } = require("axios");
 
 export const getownerData = createAsyncThunk("/owner/getownerdata",async(token)=>{
-    let data = await axios.get("http://localhost:8080/owner/plandata",{
+    let data = await axios.get("https://workout-backend-ethn.onrender.com/owner/plandata",{
         headers:{
             authorization:`Bearer ${token}`
         }

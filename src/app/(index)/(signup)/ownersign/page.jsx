@@ -19,7 +19,7 @@ export default function OwnerSignUp() {
     e.preventDefault();
     setLoading(true);
     try {
-      let res = await axios.post("http://localhost:8080/ownersignup", form);
+      let res = await axios.post("https://workout-backend-ethn.onrender.com/ownersignup", form);
 
       if (res.status === 201 || res.status === 200) {
         toast.success("Account created successfully 🎉");

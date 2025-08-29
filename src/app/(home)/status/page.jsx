@@ -12,7 +12,7 @@ export default function StatusPage() {
     const fetchMembers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:8080/owner/status", {
+        const res = await axios.get("https://workout-backend-ethn.onrender.com/owner/status", {
           headers: { Authorization: `Bearer ${token}` },
         });
 

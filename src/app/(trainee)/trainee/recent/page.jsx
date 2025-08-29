@@ -12,7 +12,7 @@ const RecentJoinsPage = () => {
     const callData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/trainee/profile/recent",
+          "https://workout-backend-ethn.onrender.com/trainee/profile/recent",
           {
             headers: {
               authorization: `Bearer ${token}`,

@@ -25,7 +25,7 @@ const JoinGymPage = () => {
       console.log("Befor api call")
       try {
         const response = await axios.get(
-          `http://localhost:8080/trainee/getgyminfo/${id}`
+          `https://workout-backend-ethn.onrender.com/trainee/getgyminfo/${id}`
         );
         console.log("Inside function ")
         setGym(response.data);
@@ -56,7 +56,7 @@ const JoinGymPage = () => {
 
     try {
       await axios.post(
-        "http://localhost:8080/trainee/confirmjoin",
+        "https://workout-backend-ethn.onrender.com/trainee/confirmjoin",
         { gymId: id, planId: selectedPlan, startDate, endDate },
         { headers: { Authorization: `Bearer ${token}` } }
       );

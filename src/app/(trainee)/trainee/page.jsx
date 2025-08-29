@@ -12,7 +12,7 @@ const Page = () => {
     const fetchActivePlan = async () => {
       let token = localStorage.getItem("token");
       try {
-        const response = await axios.get("http://localhost:8080/trainee/profile/mydetail", {
+        const response = await axios.get("https://workout-backend-ethn.onrender.com/trainee/profile/mydetail", {
           headers: {
             authorization: `Bearer ${token}`,
           },

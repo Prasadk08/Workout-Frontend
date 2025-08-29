@@ -24,7 +24,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/owner/home", {
+        const res = await axios.get("https://workout-backend-ethn.onrender.com/owner/home", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setImages(res.data.gymImages);
@@ -58,7 +58,7 @@ const onPickFiles = (e) => {
     const form = new FormData();
     form.append("image", files[0]);   // only one file append
 
-    const res = await axios.post("http://localhost:8080/gymowner/upload", form, {
+    const res = await axios.post("https://workout-backend-ethn.onrender.com/gymowner/upload", form, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "multipart/form-data",

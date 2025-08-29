@@ -12,7 +12,7 @@ const MyDetailsPage = () => {
     const callData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/trainee/profile/mydetail",
+          "https://workout-backend-ethn.onrender.com/trainee/profile/mydetail",
           {
             headers: {
               authorization: `Bearer ${token}`,

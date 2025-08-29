@@ -40,7 +40,7 @@ const EditProfileForm = () => {
     console.log(localStorage.getItem("token"));
     try {
       let res = await axios.post(
-        "http://localhost:8080/owner/profile/edit",
+        "https://workout-backend-ethn.onrender.com/owner/profile/edit",
         formData,
         {
           headers: {

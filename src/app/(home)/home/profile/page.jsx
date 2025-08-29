@@ -20,7 +20,7 @@ const ProfileView = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem("token");
-        let res = await axios.get("http://localhost:8080/owner/profile", {
+        let res = await axios.get("https://workout-backend-ethn.onrender.com/owner/profile", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setOwner(res.data);
