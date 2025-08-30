@@ -27,6 +27,7 @@ export default function Dashboard() {
         const res = await axios.get("https://workout-backend-ethn.onrender.com/owner/home", {
           headers: { Authorization: `Bearer ${token}` },
         });
+        setLoading(false)
         setImages(res.data.gymImages);
         setOwner(res.data);
         setStats({
@@ -35,7 +36,6 @@ export default function Dashboard() {
           expiredPlans: res.data.members.filter((m) => !m.isActive).length,
           revenue: res.data.members.reduce((sum, m) => sum + (m.myPlan?.price || 0), 0),
         });
-        setLoading(false)
       } catch (err) {
         console.error("Error fetching owner data", err);
       }

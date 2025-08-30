@@ -36,7 +36,7 @@ const EditProfilePage = () => {
         }
       );
       toast.success("Profile updated successfully!");
-      router.push("/trainee/detail");
+      router.push("/trainee");
       console.log("Updated Response:", response.data);
     } catch (error) {
       console.error("Error updating profile:", error);

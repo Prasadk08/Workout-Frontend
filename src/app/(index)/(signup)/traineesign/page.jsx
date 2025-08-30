@@ -29,9 +29,10 @@ export default function traineesign() {
      console.log(res.status)
 
       if (res.status == 201 || res.status == 200) {
+        localStorage.setItem("token", res.data.token);
         toast.success("Account created successfully 🎉");
         setForm({ username: "", password: "" });
-        router.push("/trainee")
+        router.push("/trainee/detail/edit")
       }
     }catch(e){
       if(e.response && e.response.status === 409){

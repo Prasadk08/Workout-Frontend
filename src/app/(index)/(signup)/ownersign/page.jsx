@@ -29,13 +29,15 @@ export default function OwnerSignUp() {
     setLoading(true);
     try {
       let res = await axios.post("https://workout-backend-ethn.onrender.com/ownersignup", form);
+      // let res = await axios.post("http://localhost:8080/ownersignup", form);
       console.log("Response is comming from backend")
       console.log("This is data :",res)
 
       if (res.status == 201 || res.status == 200) {
+        localStorage.setItem("token", res.data.token);
         toast.success("Account created successfully 🎉");
         setForm({ username: "", password: "" });
-        router.push("/home")
+        router.push("/home/profile/edit")
       }
     } catch (err) {
       if (err.response && err.response.status === 409) {
