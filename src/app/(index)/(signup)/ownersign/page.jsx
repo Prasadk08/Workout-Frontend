@@ -4,12 +4,15 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function OwnerSignUp() {
   const [form, setForm] = useState({
     username: "",
     password: "",
   });
+
+  const router = useRouter()
 
   const[loading,setLoading]=useState(false)
 
@@ -22,10 +25,12 @@ export default function OwnerSignUp() {
     setLoading(true);
     try {
       let res = await axios.post("https://workout-backend-ethn.onrender.com/ownersignup", form);
+      console.log(res.status)
 
-      if (res.status === 201 || res.status === 200) {
+      if (res.status == 201 || res.status == 200) {
         toast.success("Account created successfully 🎉");
         setForm({ username: "", password: "" });
+        router.push("/home")
       }
     } catch (err) {
       if (err.response && err.response.status === 409) {
