@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 
@@ -12,8 +13,10 @@ export default function traineesign() {
 
   const[loading,setLoading]=useState(false)
 
+  const router = useRouter()
+
   const handleChange = (e) => {
-    if(username=="" || password==""){
+    if(form.username=="" || form.password==""){
       setLoading(false)
     }
     setForm({ ...form, [e.target.name]: e.target.value });

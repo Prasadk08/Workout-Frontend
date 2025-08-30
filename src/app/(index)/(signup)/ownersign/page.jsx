@@ -4,7 +4,8 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
 
 export default function OwnerSignUp() {
   const [form, setForm] = useState({
@@ -17,7 +18,7 @@ export default function OwnerSignUp() {
   const[loading,setLoading]=useState(false)
 
   const handleChange = (e) => {
-    if(username=="" || password==""){
+    if(form.username=="" || form.password==""){
       setLoading(false)
     }
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -28,7 +29,8 @@ export default function OwnerSignUp() {
     setLoading(true);
     try {
       let res = await axios.post("https://workout-backend-ethn.onrender.com/ownersignup", form);
-      console.log(res.status)
+      console.log("Response is comming from backend")
+      console.log("This is data :",res)
 
       if (res.status == 201 || res.status == 200) {
         toast.success("Account created successfully 🎉");
