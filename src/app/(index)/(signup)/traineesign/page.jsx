@@ -18,9 +18,13 @@ export default function traineesign() {
     e.preventDefault();
     try{
       let res = await axios.post("https://workout-backend-ethn.onrender.com/traineesignup", form);
-      console.log(res.data)
-      if(res.data.msg) console.log(res.data.msg)
-      if(res.data.token) console.log(res.data.token)
+     console.log(res.status)
+
+      if (res.status == 201 || res.status == 200) {
+        toast.success("Account created successfully 🎉");
+        setForm({ username: "", password: "" });
+        router.push("/trainee")
+      }
     }catch(e){
       if(e.response && e.response.status === 409){
         toast.error("Username already exists");
