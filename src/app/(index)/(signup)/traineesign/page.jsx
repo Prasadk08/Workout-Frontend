@@ -10,7 +10,12 @@ export default function traineesign() {
     password: "",
   });
 
+  const[loading,setLoading]=useState(false)
+
   const handleChange = (e) => {
+    if(username=="" || password==""){
+      setLoading(false)
+    }
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -70,11 +75,16 @@ export default function traineesign() {
               placeholder="••••••••"
             />
           </div>
-          <button
+           <button
             type="submit"
-            className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl transition duration-300"
+            disabled={loading}
+            className={`w-full py-3 rounded-xl font-semibold text-white shadow-md transform transition duration-300 ${
+              loading
+                ? "bg-indigo-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 hover:scale-[1.02]"
+            }`}
           >
-            Sign Up
+            {loading ? "Creating Account..." : "Sign Up"}
           </button>
         </form>
         <p className="text-center text-sm text-gray-500 mt-4">

@@ -17,6 +17,9 @@ export default function OwnerSignUp() {
   const[loading,setLoading]=useState(false)
 
   const handleChange = (e) => {
+    if(username=="" || password==""){
+      setLoading(false)
+    }
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
