@@ -51,6 +51,9 @@ export default function AddPlanPage() {
           },
         }
       );
+
+      router.push("/plans")
+
     } catch (e) {
       console.log(e);
     }

@@ -40,7 +40,7 @@ const ExploreGymPage = () => {
       <input
         type="text"
         placeholder="Search by location"
-        className="w-3/5 px-4 py-2 rounded-2xl"
+        className="block w-3/5 px-4 py-2 rounded-2xl mb-2 border mx-auto"
         name="searchdata"
         value={search}
         onChange={(e) => Setsearchdata(e.target.value)}
