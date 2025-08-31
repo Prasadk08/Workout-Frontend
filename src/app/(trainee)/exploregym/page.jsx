@@ -18,7 +18,7 @@ const ExploreGymPage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (searchData == "") {
+    if (search == "") {
       return;
     }
     setFilter(true);
