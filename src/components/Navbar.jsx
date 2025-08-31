@@ -19,9 +19,6 @@ const Navbar = () => {
           <Link href="/about" className="hover:text-blue-600 transition">
             About
           </Link>
-          <Link href="/contact" className="hover:text-blue-600 transition">
-            Contact
-          </Link>
         </div>
 
         {/* Login Button */}
