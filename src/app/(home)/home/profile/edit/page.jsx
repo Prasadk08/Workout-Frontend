@@ -21,10 +21,10 @@ const EditProfileForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       const dummyData = {
-        name: "Prasad Kshirsagar",
-        gymName: "FitLife Gym",
-        phone: 9876543210,
-        gymLocation: "Pune, Maharashtra",
+        name: "",
+        gymName: "",
+        phone: 123456789,
+        gymLocation: "",
       };
       setFormData(dummyData);
     };
