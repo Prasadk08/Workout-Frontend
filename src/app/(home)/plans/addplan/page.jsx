@@ -39,7 +39,7 @@ export default function AddPlanPage() {
     try {
       let token = localStorage.getItem("token");
       let res = await axios.post(
-        "https://workout-backend-ethn.onrender.com/owner/addplans",
+        "https://workout-backend-ethn.onrender.com/owner/addplan",
         {
           ...formData,
           price: Number(formData.price),
