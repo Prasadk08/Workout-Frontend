@@ -20,14 +20,12 @@ const JoinGymPage = () => {
     const token = localStorage.getItem("token");
     setToken(token);
 
-    console.log("Calling function")
     async function fetchGymData() {
       console.log("Befor api call")
       try {
         const response = await axios.get(
           `https://workout-backend-ethn.onrender.com/trainee/getgyminfo/${id}`
         );
-        console.log("Inside function ")
         setGym(response.data);
         setLoading(false)
         toast.success("Gym Loaded Successfully!");
