@@ -27,6 +27,7 @@ export default function traineesign() {
     e.preventDefault();
     try{
       let res = await axios.post("https://workout-backend-ethn.onrender.com/traineesignup", form);
+      // let res = await axios.post("http://localhost:8080/traineesignup", form);
      console.log(res.status)
 
       if (res.status == 201 || res.status == 200) {

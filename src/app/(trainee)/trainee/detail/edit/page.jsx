@@ -29,6 +29,7 @@ const EditProfilePage = () => {
     try {
       const response = await axios.put(
         "https://workout-backend-ethn.onrender.com/trainee/profile/mydetail",
+        // "http://localhost:8080/trainee/profile/mydetail",
         formData,
         {
           headers: {
