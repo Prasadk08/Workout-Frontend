@@ -15,6 +15,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata = {
+  title: "FitTrack Pro | Your Personal Workout Companion",
+  description:
+    "Track workouts, monitor progress, and stay motivated with FitTrack Pro – your ultimate fitness management platform.",
+  icons: {
+    icon: "/project-icon.png",
+  },
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

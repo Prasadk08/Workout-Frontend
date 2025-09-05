@@ -5,6 +5,15 @@ import "../globals.css";
 import ProviderWrapper from "@/app/provider";
 // import SidebarLayout from "@/components/SideBarLayout";
 
+export const metadata = {
+  title: "FitTrack Pro | Your Personal Workout Companion",
+  description:
+    "Track workouts, monitor progress, and stay motivated with FitTrack Pro – your ultimate fitness management platform.",
+  icons: {
+    icon: "/project-icon.png",
+  },
+};
+
 export default function HomeLayout({ children }) {
   return (
     <html lang="en">
