@@ -20,8 +20,11 @@ export default function StatusPage() {
         );
 
         // Sort by earliest endDate first
+        let sorted;
+        console.log("This is testing 1")
         if (res.data) {
-          const sorted = [...res.data].sort(
+          console.log("This is testing 2",res.data)
+          sorted = [...res.data].sort(
             (a, b) => new Date(a.endDate) - new Date(b.endDate)
           );
         }
