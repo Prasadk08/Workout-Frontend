@@ -23,14 +23,14 @@ export default function StatusPage() {
         let sorted;
         console.log("This is testing 1")
         if (res.data.members) {
-          console.log("This is testing 2",res.data)
+          console.log("This is testing 2",res.data.members)
           sorted = [...res.data].sort(
             (a, b) => new Date(a.endDate) - new Date(b.endDate)
           );
         }
 
-        setMembers(sorted);
         setLoading(false);
+        setMembers(sorted);
       } catch (err) {
         console.error("Error fetching member data", err);
       }
