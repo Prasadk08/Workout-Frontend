@@ -28,7 +28,6 @@ const allgym = createSlice({
             return data;
         }
       });
-      console.log(state.searchData);
       state.loading = false;
     },
   },

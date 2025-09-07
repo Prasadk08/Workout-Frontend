@@ -6,23 +6,28 @@ import Loading from "@/app/Loading/page";
 
 export default function StatusPage() {
   const [members, setMembers] = useState([]);
-   const[loading,setLoading]= useState(true)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMembers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("https://workout-backend-ethn.onrender.com/owner/status", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-
-        // Sort by earliest endDate first
-        const sorted = [...res.data].sort(
-          (a, b) => new Date(a.endDate) - new Date(b.endDate)
+        const res = await axios.get(
+          "https://workout-backend-ethn.onrender.com/owner/status",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
         );
 
+        // Sort by earliest endDate first
+        if (res.data) {
+          const sorted = [...res.data].sort(
+            (a, b) => new Date(a.endDate) - new Date(b.endDate)
+          );
+        }
+
         setMembers(sorted);
-        setLoading(false)
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching member data", err);
       }
@@ -42,7 +47,7 @@ export default function StatusPage() {
     return { label: "Active", color: "bg-green-100 text-green-700" };
   };
 
-  if(loading) return <Loading />
+  if (loading) return <Loading />;
 
   return (
     <div className="mt-6 max-w-6xl mx-auto px-4">
@@ -74,7 +79,9 @@ export default function StatusPage() {
                   <td className="py-3 px-6">
                     {member.myPlan?.planName || "N/A"}
                   </td>
-                  <td className="py-3 px-6">{member.startDate?.slice(0, 10)}</td>
+                  <td className="py-3 px-6">
+                    {member.startDate?.slice(0, 10)}
+                  </td>
                   <td className="py-3 px-6">{member.endDate?.slice(0, 10)}</td>
                   <td className="py-3 px-6">
                     <span
@@ -133,9 +140,7 @@ export default function StatusPage() {
             );
           })
         ) : (
-          <p className="text-center text-gray-500">
-            No member data available.
-          </p>
+          <p className="text-center text-gray-500">No member data available.</p>
         )}
       </div>
     </div>
