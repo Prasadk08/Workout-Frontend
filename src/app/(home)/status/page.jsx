@@ -21,7 +21,7 @@ export default function StatusPage() {
 
         // Sort by earliest endDate first
         let sorted;
-        console.log("This is testing 1")
+        console.log("This is testing 1", res.data.members)
         if (res.data.members) {
           console.log("This is testing 2",res.data.members)
           sorted = [...res.data].sort(
