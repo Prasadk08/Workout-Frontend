@@ -14,25 +14,23 @@ export default function StatusPage() {
         const token = localStorage.getItem("token");
         const res = await axios.get(
           "https://workout-backend-ethn.onrender.com/owner/status",
+          // "http://localhost:8080/owner/status",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
 
         // Sort by earliest endDate first
-        let sorted;
-        console.log("This is testing 1", res.data.members)
-        if (res.data.members) {
-          console.log("This is testing 2",res.data.members)
-          sorted = [...res.data].sort(
+        if (res?.data?.members) {
+          sorted = [...res.data.members].sort(
             (a, b) => new Date(a.endDate) - new Date(b.endDate)
           );
         }
-
-        setLoading(false);
         setMembers(sorted);
       } catch (err) {
         console.error("Error fetching member data", err);
+      }finally{
+        setLoading(false);
       }
     };
 
