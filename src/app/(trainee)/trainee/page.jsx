@@ -59,7 +59,7 @@ const Page = () => {
           </Link>
           <Link
             href="/trainee/ai"
-            className="bg-purple-600 text-white py-2 px-4 rounded-xl text-center font-semibold hover:bg-purple-700 transition-all duration-200"
+            className="bg-red-600 text-white py-2 px-4 rounded-xl text-center font-semibold hover:bg-purple-700 transition-all duration-200"
           >
             AI Diet & Workout
           </Link>
