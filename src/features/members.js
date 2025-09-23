@@ -4,6 +4,7 @@ import reducer from "./allgym";
 
 export const getAllmembers = createAsyncThunk("/owner/getallmembers",async(token)=>{
     let data = await axios.get("https://workout-backend-ethn.onrender.com/owner/getallmembers",{
+    // let data = await axios.get("http://localhost:8080/owner/getallmembers",{
         headers:{
             authorization:`Bearer ${token}`
         }

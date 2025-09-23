@@ -19,7 +19,7 @@ export default function StatusPage() {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-
+        let sorted
         // Sort by earliest endDate first
         if (res?.data?.members) {
           sorted = [...res.data.members].sort(
