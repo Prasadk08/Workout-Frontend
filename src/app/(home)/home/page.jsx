@@ -40,7 +40,7 @@ export default function Dashboard() {
         console.error("Error fetching owner data", err);
       }
     };
- 
+
     if (token) {
       fetchData();
     }
@@ -66,6 +66,7 @@ const onPickFiles = (e) => {
     });
 
     setImages((prev) => [...prev, res.data]);  // only one image add
+    toast.success("Uploaded successfully");
     toast.success("Uploaded successfully");
     setFiles([]);
   } catch (e) {
