@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { User, Dumbbell, Phone, MapPin, PenIcon, Home } from "lucide-react";
+import { User, Dumbbell, Phone, MapPin, PenIcon, Home, Info } from "lucide-react";
 import Link from "next/link";
+
 
 const MyDetailsPage = () => {
   const [user, setUser] = useState({});
@@ -97,6 +98,18 @@ const MyDetailsPage = () => {
               <p className="text-xl font-semibold text-gray-800">
                 {user?.address || "Not Available"}
               </p>
+            </div>
+          </div>
+          {/* Personal Info */}
+      
+          <div className="flex items-center space-x-4">
+            <Info className="Red-purple-500" />
+            <div>
+              <p className="text-sm text-gray-500">Personal Info :</p>
+              <p className="text-xl font-semibold text-gray-800">
+                {user?.personalInfo || "Not Added"}
+              </p>
+              <p className="text-red-600 text-base py-2">Ai-response is generated on above Info</p>
             </div>
           </div>
         </div>
