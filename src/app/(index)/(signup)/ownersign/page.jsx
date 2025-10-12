@@ -61,6 +61,7 @@ export default function OwnerSignUp() {
         <p className="text-center text-gray-500 mb-6 text-sm">
           Sign up to manage your Gym with ease 🚀
           Sign up to manage your Gym with ease 🚀
+          Sign up to manage your Gym with ease 🚀
         </p>
 
         {/* Form */}
