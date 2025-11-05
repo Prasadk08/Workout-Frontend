@@ -11,7 +11,8 @@ export default function AiPlanPage() {
     const callAiModel = async () => {
       try {
         let res = await axios.get(
-          "https://workout-backend-ethn.onrender.com/trainee/ai-plan",
+          // "https://workout-backend-ethn.onrender.com/trainee/ai-plan",
+          "http://localhost:8080/trainee/ai-plan",
           {
             headers: {
               Authorization: `Bearer ${token}`,
